@@ -101,12 +101,12 @@
   <main class="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-2 gap-5 p-4 sm:p-5 max-w-[1600px] w-full mx-auto overflow-hidden">
 
     <!-- ============ LEFT COLUMN ============ -->
-    <section class="flex flex-col gap-4 min-h-0 overflow-y-auto thin-scroll pr-1">
+    <section class="flex flex-col gap-3 min-h-0 overflow-y-auto thin-scroll pr-1">
 
       <!-- Talent Details -->
-      <div class="bg-[#121212] border border-[#27272A] rounded-2xl p-5">
-        <h2 class="text-sm font-semibold uppercase tracking-wider text-[#9CA3AF] mb-4">Interviewee Details</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div class="bg-[#121212] border border-[#27272A] rounded-2xl p-4">
+        <h2 class="text-sm font-semibold uppercase tracking-wider text-[#9CA3AF] mb-3">Interviewee Details</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           <label class="flex flex-col gap-1.5 sm:col-span-2">
             <span class="text-xs text-[#9CA3AF]">Full Name <span class="text-red-400">*</span></span>
             <input id="talent-name" type="text" autocomplete="name" placeholder="Jane Doe"
@@ -130,12 +130,12 @@
       </div>
 
       <!-- Media Release Terms -->
-      <div class="bg-[#121212] border border-[#27272A] rounded-2xl p-5 flex flex-col">
-        <div class="flex items-center justify-between mb-3">
+      <div class="bg-[#121212] border border-[#27272A] rounded-2xl p-4 flex flex-col">
+        <div class="flex items-center justify-between mb-2.5">
           <h2 class="text-sm font-semibold uppercase tracking-wider text-[#9CA3AF]">Media Release Agreement</h2>
           <span class="text-[10px] text-[#9CA3AF] border border-[#27272A] rounded-full px-2 py-0.5">Scroll to read</span>
         </div>
-        <div id="release-text" class="thin-scroll text-[13px] leading-relaxed text-[#9CA3AF] bg-black/40 border border-[#27272A] rounded-lg p-4 h-28 overflow-y-auto space-y-3">
+        <div id="release-text" class="thin-scroll text-[13px] leading-relaxed text-[#9CA3AF] bg-black/40 border border-[#27272A] rounded-lg p-3.5 h-20 overflow-y-auto space-y-3">
           <p><strong class="text-white">APPEARANCE, MEDIA &amp; TALENT RELEASE</strong><br/>
           Animal Farm, Inc. ("Producer") — Cisco Cybercon Event Coverage</p>
           <p>In exchange for good and valuable consideration, the receipt and sufficiency of which is hereby acknowledged, I grant to Animal Farm, Inc., its clients, successors, and assigns (collectively, "Producer") the irrevocable, worldwide, royalty-free right to record my name, voice, image, likeness, statements, and appearance (the "Recording") captured on the date below at Cisco Cybercon, and to edit, reproduce, publish, broadcast, stream, and otherwise use the Recording, in whole or in part, in any medium now known or hereafter devised, for promotional, marketing, editorial, archival, and commercial purposes.</p>
@@ -144,14 +144,14 @@
           <p>I confirm I am at least 18 years of age (or am the parent/legal guardian of the minor named above and consent on their behalf), that I have read this release in its entirety, and that I am signing it voluntarily.</p>
           <p class="text-white/70 text-[11px]">This is a standard-form release provided for convenience and does not constitute legal advice; Animal Farm, Inc. recommends counsel review for specific engagements.</p>
         </div>
-        <label class="flex items-start gap-2.5 mt-3.5 cursor-pointer select-none">
+        <label class="flex items-start gap-2.5 mt-2.5 cursor-pointer select-none">
           <input id="agree-checkbox" type="checkbox" class="mt-0.5 w-4 h-4 rounded accent-white bg-black border-[#27272A]" />
           <span class="text-xs text-[#9CA3AF]">I have read and agree to the terms of this Media Release Agreement.</span>
         </label>
       </div>
 
       <!-- Signature -->
-      <div class="bg-[#121212] border border-[#27272A] rounded-2xl p-4 flex-1 flex flex-col min-h-[140px]">
+      <div class="bg-[#121212] border border-[#27272A] rounded-2xl p-4 flex-1 flex flex-col min-h-[320px] shrink-0">
         <div class="flex items-center justify-between mb-3">
           <h2 class="text-sm font-semibold uppercase tracking-wider text-[#9CA3AF]">Signature <span class="text-red-400">*</span></h2>
           <button id="clear-signature-btn" class="text-xs font-medium text-[#9CA3AF] hover:text-white border border-[#27272A] rounded-lg px-3 py-1.5 transition">Clear</button>
