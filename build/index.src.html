@@ -74,7 +74,7 @@
       <div class="w-9 h-9 rounded-md bg-white text-black font-extrabold flex items-center justify-center text-sm">AF</div>
       <div>
         <h1 class="text-base sm:text-lg font-semibold tracking-tight leading-none">Animal Farm, Inc.</h1>
-        <p class="text-xs text-[#9CA3AF] leading-none mt-1">Talent Release &middot; <span class="text-white/80">Cisco Cybercon</span> &middot; <span class="text-[#4B5563]">v2</span></p>
+        <p class="text-xs text-[#9CA3AF] leading-none mt-1">Talent Release &middot; <span class="text-white/80">Cisco Cybercon</span> &middot; <span class="text-[#4B5563]">v2.1</span></p>
       </div>
     </div>
 
@@ -129,7 +129,7 @@
           <h2 class="text-sm font-semibold uppercase tracking-wider text-[#9CA3AF]">Media Release Agreement</h2>
           <span class="text-[10px] text-[#9CA3AF] border border-[#27272A] rounded-full px-2 py-0.5">Scroll to read</span>
         </div>
-        <div id="release-text" class="thin-scroll text-[13px] leading-relaxed text-[#9CA3AF] bg-black/40 border border-[#27272A] rounded-lg p-3.5 h-20 overflow-y-auto space-y-3">
+        <div id="release-text" class="thin-scroll text-sm leading-relaxed text-[#9CA3AF] bg-black/40 border border-[#27272A] rounded-lg p-4 h-48 lg:h-64 overflow-y-auto space-y-3">
           <p><strong class="text-white">APPEARANCE, MEDIA &amp; TALENT RELEASE</strong><br/>
           Animal Farm, Inc. ("Producer") &middot; Cisco Cybercon Event Coverage</p>
           <p>In exchange for good and valuable consideration, the receipt and sufficiency of which is hereby acknowledged, I grant to Animal Farm, Inc., its clients, successors, and assigns (collectively, "Producer") the irrevocable, worldwide, royalty-free right to record my name, voice, image, likeness, statements, and appearance (the "Recording") captured on the date below at Cisco Cybercon, and to edit, reproduce, publish, broadcast, stream, and otherwise use the Recording, in whole or in part, in any medium now known or hereafter devised, for promotional, marketing, editorial, archival, and commercial purposes.</p>
@@ -138,10 +138,13 @@
           <p>I confirm I am at least 18 years of age (or am the parent/legal guardian of the minor named above and consent on their behalf), that I have read this release in its entirety, and that I am signing it voluntarily.</p>
           <p class="text-white/70 text-[11px]">This is a standard-form release provided for convenience and does not constitute legal advice; Animal Farm, Inc. recommends counsel review for specific engagements.</p>
         </div>
-        <label class="flex items-start gap-2.5 mt-2.5 cursor-pointer select-none">
-          <input id="agree-checkbox" type="checkbox" class="mt-0.5 w-4 h-4 rounded accent-white bg-black border-[#27272A]" />
-          <span class="text-xs text-[#9CA3AF]">I have read and agree to the terms of this Media Release Agreement.</span>
-        </label>
+        <button id="agree-toggle" type="button" aria-pressed="false"
+          class="w-full flex items-center gap-3.5 mt-3 rounded-xl border border-[#27272A] bg-black/40 px-4 py-3.5 text-left transition hover:border-white/40">
+          <span id="agree-box" class="w-7 h-7 shrink-0 rounded-md border-2 border-[#4B5563] flex items-center justify-center transition">
+            <svg id="agree-check" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <span id="agree-label" class="text-sm text-[#9CA3AF]">I have read and agree to the terms of this Media Release Agreement.</span>
+        </button>
       </div>
 
       <!-- Signature -->
@@ -251,7 +254,7 @@
    * CONFIG
    * ------------------------------------------------------------- */
   const CONFIG = {
-    appVersion: '2.0.0',
+    appVersion: '2.1.0',
     eventName: 'Cisco Cybercon',
     producerName: 'Animal Farm, Inc.',
     adminEmail: 'admin@animalfarminc.com',
@@ -271,7 +274,10 @@
   const emailInput  = el('talent-email');
   const phoneInput  = el('talent-phone');
   const dateInput   = el('talent-date');
-  const agreeBox    = el('agree-checkbox');
+  const agreeToggle = el('agree-toggle');
+  const agreeBoxEl  = el('agree-box');
+  const agreeCheck  = el('agree-check');
+  const agreeLabel  = el('agree-label');
 
   const cameraInput      = el('camera-input');
   const takePhotoBtn     = el('take-photo-btn');
@@ -304,6 +310,32 @@
   const toastEl = el('toast');
 
   let capturedPhotoDataUrl = null;
+  let agreed = false;
+
+  /* ---------------------------------------------------------------
+   * AGREEMENT TOGGLE
+   * A plain button with JS-managed state: native checkboxes inside
+   * styled labels are unreliable tap targets on iPad Safari.
+   * ------------------------------------------------------------- */
+  function setAgreed(value) {
+    agreed = value;
+    agreeToggle.setAttribute('aria-pressed', String(value));
+    if (value) {
+      agreeBoxEl.classList.add('bg-white', 'border-white');
+      agreeBoxEl.classList.remove('border-[#4B5563]');
+      agreeCheck.classList.remove('hidden');
+      agreeLabel.classList.add('text-white');
+      agreeLabel.classList.remove('text-[#9CA3AF]');
+    } else {
+      agreeBoxEl.classList.remove('bg-white', 'border-white');
+      agreeBoxEl.classList.add('border-[#4B5563]');
+      agreeCheck.classList.add('hidden');
+      agreeLabel.classList.remove('text-white');
+      agreeLabel.classList.add('text-[#9CA3AF]');
+    }
+    validateForm();
+  }
+  agreeToggle.addEventListener('click', () => setAgreed(!agreed));
 
   /* ---------------------------------------------------------------
    * TOAST
@@ -498,7 +530,7 @@
     const emailOk = isValidEmail(emailInput.value.trim());
     const phoneOk = phoneInput.value.trim().length >= 7;
     const dateOk  = !!dateInput.value;
-    const agreeOk = agreeBox.checked;
+    const agreeOk = agreed;
     const photoOk = !!capturedPhotoDataUrl;
     const sigOk   = !signaturePad.isEmpty();
 
@@ -524,7 +556,6 @@
   [nameInput, emailInput, phoneInput, dateInput].forEach((input) => {
     input.addEventListener('input', validateForm);
   });
-  agreeBox.addEventListener('change', validateForm);
   validateForm();
 
   /* ---------------------------------------------------------------
@@ -823,7 +854,7 @@
     emailInput.value = '';
     phoneInput.value = '';
     setTodayDate();
-    agreeBox.checked = false;
+    setAgreed(false);
     resetPhoto();
     signaturePad.clear();
     signaturePlaceholder.classList.remove('hidden');
