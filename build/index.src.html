@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<title>Animal Farm, Inc. · Talent Release</title>
+
+<!-- PWA / iPad meta -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="AF Release" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="theme-color" content="#000000" />
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%23000000'/%3E%3Ctext x='90' y='108' font-family='Arial, sans-serif' font-size='64' font-weight='700' fill='%23FFFFFF' text-anchor='middle'%3EAF%3C/text%3E%3C/svg%3E" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%23000000'/%3E%3Ctext x='90' y='108' font-family='Arial, sans-serif' font-size='64' font-weight='700' fill='%23FFFFFF' text-anchor='middle'%3EAF%3C/text%3E%3C/svg%3E" />
+<link rel="manifest" href='data:application/manifest+json,{"name":"Animal Farm Talent Release","short_name":"AF Release","display":"standalone","orientation":"landscape","background_color":"%23000000","theme_color":"%23000000","icons":[]}' />
+
+<!-- Compiled Tailwind CSS (inlined at build time; no CDN, works offline) -->
+<style>/*__TAILWIND_CSS__*/</style>
+
+<style>
+  html, body {
+    background: #000000;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+  }
+
+  /* hide native scrollbar chrome but keep scroll */
+  .thin-scroll::-webkit-scrollbar { width: 6px; }
+  .thin-scroll::-webkit-scrollbar-track { background: transparent; }
+  .thin-scroll::-webkit-scrollbar-thumb { background: #27272A; border-radius: 9999px; }
+
+  canvas#signature-canvas {
+    touch-action: none;
+    background: #0a0a0a;
+  }
+
+  .field-input {
+    background: #0a0a0a;
+    border: 1px solid #27272A;
+    color: #FFFFFF;
+  }
+  .field-input::placeholder { color: #6B7280; }
+  .field-input:focus {
+    outline: none;
+    border-color: #FFFFFF;
+  }
+
+  @keyframes toast-in {
+    from { opacity: 0; transform: translate(-50%, 12px); }
+    to   { opacity: 1; transform: translate(-50%, 0); }
+  }
+  .toast { animation: toast-in .25s ease-out; }
+
+  .pulse-dot {
+    box-shadow: 0 0 0 0 rgba(239,68,68,.6);
+    animation: pulse-ring 1.8s infinite;
+  }
+  @keyframes pulse-ring {
+    0%   { box-shadow: 0 0 0 0 rgba(239,68,68,.55); }
+    70%  { box-shadow: 0 0 0 8px rgba(239,68,68,0); }
+    100% { box-shadow: 0 0 0 0 rgba(239,68,68,0); }
+  }
+</style>
+</head>
+<body class="bg-black text-white min-h-screen">
+
+<div id="app" class="h-screen flex flex-col overflow-hidden">
+
+  <!-- ================= HEADER ================= -->
+  <header class="shrink-0 flex items-center justify-between px-6 py-3 border-b border-[#27272A] bg-[#0A0A0A]/80 backdrop-blur">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-md bg-white text-black font-extrabold flex items-center justify-center text-sm">AF</div>
+      <div>
+        <h1 class="text-base sm:text-lg font-semibold tracking-tight leading-none">Animal Farm, Inc.</h1>
+        <p class="text-xs text-[#9CA3AF] leading-none mt-1">Talent Release &middot; <span class="text-white/80">Cisco Cybercon</span> &middot; <span class="text-[#4B5563]">v2</span></p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <span id="online-badge" class="inline-flex items-center gap-1.5 text-xs text-[#9CA3AF] px-2.5 py-1 rounded-full border border-[#27272A]">
+        <span id="online-dot" class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        <span id="online-text">Online</span>
+      </span>
+      <button id="open-queue-btn" class="relative inline-flex items-center gap-2 text-xs sm:text-sm font-medium bg-[#121212] hover:bg-[#1a1a1a] border border-[#27272A] text-white px-3.5 py-2 rounded-lg transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/></svg>
+        Queue
+        <span id="queue-count" class="min-w-[18px] h-[18px] px-1 rounded-full bg-white text-black text-[10px] font-bold flex items-center justify-center">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= MAIN ================= -->
+  <main class="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-2 gap-5 p-4 sm:p-5 max-w-[1600px] w-full mx-auto overflow-hidden">
+
+    <!-- ============ LEFT COLUMN ============ -->
+    <section class="flex flex-col gap-3 min-h-0 overflow-y-auto thin-scroll pr-1">
+
+      <!-- Talent Details -->
+      <div class="bg-[#121212] border border-[#27272A] rounded-2xl p-4">
+        <h2 class="text-sm font-semibold uppercase tracking-wider text-[#9CA3AF] mb-3">Interviewee Details</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <label class="flex flex-col gap-1.5 sm:col-span-2">
+            <span class="text-xs text-[#9CA3AF]">Full Name <span class="text-red-400">*</span></span>
+            <input id="talent-name" type="text" autocomplete="name" placeholder="Jane Doe"
+              class="field-input rounded-lg px-3.5 py-2.5 text-sm" />
+          </label>
+          <label class="flex flex-col gap-1.5">
+            <span class="text-xs text-[#9CA3AF]">Email Address <span class="text-red-400">*</span></span>
+            <input id="talent-email" type="email" autocomplete="email" placeholder="jane@company.com"
+              class="field-input rounded-lg px-3.5 py-2.5 text-sm" />
+          </label>
+          <label class="flex flex-col gap-1.5">
+            <span class="text-xs text-[#9CA3AF]">Phone Number <span class="text-red-400">*</span></span>
+            <input id="talent-phone" type="tel" autocomplete="tel" placeholder="(555) 123-4567"
+              class="field-input rounded-lg px-3.5 py-2.5 text-sm" />
+          </label>
+          <label class="flex flex-col gap-1.5 sm:col-span-2">
+            <span class="text-xs text-[#9CA3AF]">Date <span class="text-red-400">*</span></span>
+            <input id="talent-date" type="date" class="field-input rounded-lg px-3.5 py-2.5 text-sm w-full sm:w-1/2" />
+          </label>
+        </div>
+      </div>
+
+      <!-- Media Release Terms -->
+      <div class="bg-[#121212] border border-[#27272A] rounded-2xl p-4 flex flex-col">
+        <div class="flex items-center justify-between mb-2.5">
+          <h2 class="text-sm font-semibold uppercase tracking-wider text-[#9CA3AF]">Media Release Agreement</h2>
+          <span class="text-[10px] text-[#9CA3AF] border border-[#27272A] rounded-full px-2 py-0.5">Scroll to read</span>
+        </div>
+        <div id="release-text" class="thin-scroll text-[13px] leading-relaxed text-[#9CA3AF] bg-black/40 border border-[#27272A] rounded-lg p-3.5 h-20 overflow-y-auto space-y-3">
+          <p><strong class="text-white">APPEARANCE, MEDIA &amp; TALENT RELEASE</strong><br/>
+          Animal Farm, Inc. ("Producer") &middot; Cisco Cybercon Event Coverage</p>
+          <p>In exchange for good and valuable consideration, the receipt and sufficiency of which is hereby acknowledged, I grant to Animal Farm, Inc., its clients, successors, and assigns (collectively, "Producer") the irrevocable, worldwide, royalty-free right to record my name, voice, image, likeness, statements, and appearance (the "Recording") captured on the date below at Cisco Cybercon, and to edit, reproduce, publish, broadcast, stream, and otherwise use the Recording, in whole or in part, in any medium now known or hereafter devised, for promotional, marketing, editorial, archival, and commercial purposes.</p>
+          <p>I understand the Recording may be combined with other footage, graphics, and audio, and that Producer owns all right, title, and interest in the resulting work product, including copyright. I waive any right to inspect or approve the finished production or any related written or electronic copy.</p>
+          <p>I release and hold harmless Producer and its clients, agents, and employees from any and all claims, liability, or damages arising out of or in connection with the use of the Recording, including without limitation any claims for defamation, invasion of privacy, or right of publicity.</p>
+          <p>I confirm I am at least 18 years of age (or am the parent/legal guardian of the minor named above and consent on their behalf), that I have read this release in its entirety, and that I am signing it voluntarily.</p>
+          <p class="text-white/70 text-[11px]">This is a standard-form release provided for convenience and does not constitute legal advice; Animal Farm, Inc. recommends counsel review for specific engagements.</p>
+        </div>
+        <label class="flex items-start gap-2.5 mt-2.5 cursor-pointer select-none">
+          <input id="agree-checkbox" type="checkbox" class="mt-0.5 w-4 h-4 rounded accent-white bg-black border-[#27272A]" />
+          <span class="text-xs text-[#9CA3AF]">I have read and agree to the terms of this Media Release Agreement.</span>
+        </label>
+      </div>
+
+      <!-- Signature -->
+      <div class="bg-[#121212] border border-[#27272A] rounded-2xl p-4 flex-1 flex flex-col min-h-[320px] shrink-0">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-semibold uppercase tracking-wider text-[#9CA3AF]">Signature <span class="text-red-400">*</span></h2>
+          <button id="clear-signature-btn" class="text-xs font-medium text-[#9CA3AF] hover:text-white border border-[#27272A] rounded-lg px-3 py-1.5 transition">Clear</button>
+        </div>
+        <div class="relative flex-1 border border-dashed border-[#27272A] rounded-lg overflow-hidden">
+          <canvas id="signature-canvas" class="w-full h-full block"></canvas>
+          <p id="signature-placeholder" class="pointer-events-none absolute inset-0 flex items-center justify-center text-[#4B5563] text-sm">Sign here with finger or stylus</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RIGHT COLUMN ============ -->
+    <section class="flex flex-col gap-4 min-h-0 overflow-y-auto thin-scroll pr-1">
+
+      <div class="bg-[#121212] border border-[#27272A] rounded-2xl p-5 flex-1 flex flex-col min-h-0">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-semibold uppercase tracking-wider text-[#9CA3AF]">Photo Capture <span class="text-red-400">*</span></h2>
+          <span id="photo-status" class="text-[10px] text-[#9CA3AF] border border-[#27272A] rounded-full px-2 py-0.5">Not captured</span>
+        </div>
+
+        <input id="camera-input" type="file" accept="image/*" capture="environment" class="hidden" />
+
+        <div id="photo-frame" class="relative flex-1 min-h-[200px] rounded-xl border border-[#27272A] bg-black overflow-hidden flex items-center justify-center">
+          <!-- empty state -->
+          <div id="photo-empty-state" class="flex flex-col items-center gap-3 text-center px-6">
+            <div class="w-16 h-16 rounded-full border border-[#27272A] flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-[#9CA3AF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </div>
+            <p class="text-sm text-[#9CA3AF] max-w-[220px]">Tap below to capture a headshot with the iPad camera</p>
+          </div>
+          <!-- captured photo -->
+          <img id="photo-preview" src="" alt="Captured headshot" class="hidden absolute inset-0 w-full h-full object-cover" />
+          <span class="pulse-dot hidden absolute top-3 right-3 w-2.5 h-2.5 rounded-full bg-red-500" id="rec-dot"></span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 mt-4">
+          <button id="take-photo-btn" class="col-span-2 flex items-center justify-center gap-2 bg-white text-black font-semibold text-sm rounded-xl py-3 hover:bg-gray-200 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            <span id="take-photo-label">Take Photo</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ACTIONS ================= -->
+  <footer class="shrink-0 px-4 sm:px-6 py-3 max-w-[1600px] w-full mx-auto">
+    <div class="bg-[#121212] border border-[#27272A] rounded-2xl p-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+      <p id="form-hint" class="text-xs text-[#9CA3AF] flex-1 order-2 sm:order-1">Fill in details, capture a photo, and collect a signature to continue.</p>
+      <div class="flex gap-3 order-1 sm:order-2">
+        <button id="reset-btn" class="flex-1 sm:flex-none px-5 py-3 rounded-xl border border-[#27272A] text-sm font-medium text-[#9CA3AF] hover:text-white hover:border-white/40 transition">
+          Reset
+        </button>
+        <button id="submit-btn" disabled class="flex-1 sm:flex-none px-6 py-3 rounded-xl bg-white text-black text-sm font-semibold disabled:opacity-40 disabled:cursor-not-allowed hover:enabled:bg-gray-200 transition inline-flex items-center justify-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          <span id="submit-label">Save Release &amp; Generate PDF</span>
+        </button>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ================= QUEUE DRAWER ================= -->
+<div id="queue-overlay" class="hidden fixed inset-0 z-40 bg-black/70 backdrop-blur-sm"></div>
+<aside id="queue-drawer" class="hidden fixed top-0 right-0 z-50 h-full w-full sm:w-[420px] bg-[#0A0A0A] border-l border-[#27272A] flex flex-col">
+  <div class="flex items-center justify-between px-5 py-4 border-b border-[#27272A]">
+    <div>
+      <h3 class="text-sm font-semibold text-white">Pending Releases</h3>
+      <p class="text-xs text-[#9CA3AF]">Saved on this iPad &middot; not yet emailed</p>
+    </div>
+    <button id="close-queue-btn" class="w-8 h-8 flex items-center justify-center rounded-lg border border-[#27272A] text-[#9CA3AF] hover:text-white">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <div class="px-5 py-3 border-b border-[#27272A] bg-[#121212]/40">
+    <p class="text-[11px] leading-relaxed text-[#9CA3AF]">
+      Every release is saved to this iPad first. When you have a signal, tap <span class="text-white">Share All Pending</span> (or open a single release) to send the PDFs to
+      <span class="text-white">admin@animalfarminc.com</span> from Mail, AirDrop, or Files.
+    </p>
+    <div class="flex gap-2 mt-2.5">
+      <button id="share-all-btn" class="flex-1 text-xs font-semibold bg-white text-black rounded-lg py-2 disabled:opacity-40">Share All Pending</button>
+      <button id="download-all-btn" class="flex-1 text-xs font-medium border border-[#27272A] text-[#9CA3AF] hover:text-white rounded-lg py-2">Save All to Files</button>
+    </div>
+  </div>
+
+  <div id="queue-list" class="flex-1 overflow-y-auto thin-scroll px-4 py-3 space-y-2.5"></div>
+</aside>
+
+<!-- ================= TOAST ================= -->
+<div id="toast" class="toast hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] bg-white text-black text-sm font-medium px-5 py-3 rounded-xl shadow-2xl max-w-[92%] text-center"></div>
+
+<!-- jsPDF 2.5.1 (inlined at build time; no CDN, works offline) -->
+<script>/*__JSPDF__*/</script>
+<!-- signature_pad 4.1.7 (inlined at build time; no CDN, works offline) -->
+<script>/*__SIGPAD__*/</script>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------------------------------------------------------------
+   * CONFIG
+   * ------------------------------------------------------------- */
+  const CONFIG = {
+    appVersion: '2.0.0',
+    eventName: 'Cisco Cybercon',
+    producerName: 'Animal Farm, Inc.',
+    adminEmail: 'admin@animalfarminc.com',
+    dbName: 'af-talent-release-db',
+    dbVersion: 1,
+    storeName: 'releases',
+    maxPhotoDim: 1280,
+    photoJpegQuality: 0.82
+  };
+
+  /* ---------------------------------------------------------------
+   * DOM REFERENCES
+   * ------------------------------------------------------------- */
+  const el = (id) => document.getElementById(id);
+
+  const nameInput   = el('talent-name');
+  const emailInput  = el('talent-email');
+  const phoneInput  = el('talent-phone');
+  const dateInput   = el('talent-date');
+  const agreeBox    = el('agree-checkbox');
+
+  const cameraInput      = el('camera-input');
+  const takePhotoBtn     = el('take-photo-btn');
+  const takePhotoLabel   = el('take-photo-label');
+  const photoPreview     = el('photo-preview');
+  const photoEmptyState  = el('photo-empty-state');
+  const photoStatus      = el('photo-status');
+
+  const clearSigBtn        = el('clear-signature-btn');
+  const signatureCanvas    = el('signature-canvas');
+  const signaturePlaceholder = el('signature-placeholder');
+
+  const resetBtn   = el('reset-btn');
+  const submitBtn  = el('submit-btn');
+  const submitLabel = el('submit-label');
+  const formHint   = el('form-hint');
+
+  const openQueueBtn  = el('open-queue-btn');
+  const closeQueueBtn = el('close-queue-btn');
+  const queueOverlay  = el('queue-overlay');
+  const queueDrawer   = el('queue-drawer');
+  const queueList     = el('queue-list');
+  const queueCount    = el('queue-count');
+  const shareAllBtn   = el('share-all-btn');
+  const downloadAllBtn = el('download-all-btn');
+
+  const onlineDot  = el('online-dot');
+  const onlineText = el('online-text');
+
+  const toastEl = el('toast');
+
+  let capturedPhotoDataUrl = null;
+
+  /* ---------------------------------------------------------------
+   * TOAST
+   * ------------------------------------------------------------- */
+  let toastTimer = null;
+  function showToast(message, duration = 3200) {
+    clearTimeout(toastTimer);
+    toastEl.textContent = message;
+    toastEl.classList.remove('hidden');
+    toastTimer = setTimeout(() => toastEl.classList.add('hidden'), duration);
+  }
+
+  /* ---------------------------------------------------------------
+   * ONLINE / OFFLINE INDICATOR
+   * ------------------------------------------------------------- */
+  function updateOnlineStatus() {
+    const online = navigator.onLine;
+    onlineDot.className = 'w-1.5 h-1.5 rounded-full ' + (online ? 'bg-emerald-400' : 'bg-red-500');
+    onlineText.textContent = online ? 'Online' : 'Offline';
+  }
+  window.addEventListener('online', updateOnlineStatus);
+  window.addEventListener('offline', updateOnlineStatus);
+  updateOnlineStatus();
+
+  /* ---------------------------------------------------------------
+   * DEFAULT DATE
+   * ------------------------------------------------------------- */
+  function setTodayDate() {
+    const d = new Date();
+    const iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    dateInput.value = iso;
+  }
+  setTodayDate();
+
+  /* ---------------------------------------------------------------
+   * SIGNATURE PAD
+   * ------------------------------------------------------------- */
+  const signaturePad = new SignaturePad(signatureCanvas, {
+    backgroundColor: 'rgba(10,10,10,1)',
+    penColor: '#FFFFFF',
+    minWidth: 1.2,
+    maxWidth: 2.6
+  });
+
+  function resizeSignatureCanvas() {
+    const ratio = Math.max(window.devicePixelRatio || 1, 1);
+    const data = signaturePad.isEmpty() ? null : signaturePad.toData();
+    const rect = signatureCanvas.getBoundingClientRect();
+    // Ignore degenerate layouts (backgrounded tab, mid-rotation):
+    // resizing to 0 would silently erase the signature.
+    if (rect.width < 10 || rect.height < 10) return;
+    signatureCanvas.width = rect.width * ratio;
+    signatureCanvas.height = rect.height * ratio;
+    signatureCanvas.getContext('2d').scale(ratio, ratio);
+    signaturePad.clear();
+    if (data && data.length) signaturePad.fromData(data);
+    validateForm();
+  }
+  window.addEventListener('resize', resizeSignatureCanvas);
+  window.addEventListener('orientationchange', () => setTimeout(resizeSignatureCanvas, 300));
+  setTimeout(resizeSignatureCanvas, 50);
+
+  signaturePad.addEventListener('beginStroke', () => {
+    signaturePlaceholder.classList.add('hidden');
+  });
+  signaturePad.addEventListener('endStroke', validateForm);
+
+  clearSigBtn.addEventListener('click', () => {
+    signaturePad.clear();
+    signaturePlaceholder.classList.remove('hidden');
+    validateForm();
+  });
+
+  // Flatten the signature to a compact JPEG with the colors inverted
+  // (black ink on white) so the PDF reads like a signed paper document
+  // and stays small. Falls back to the raw PNG if anything fails.
+  function exportSignatureForPdf() {
+    if (!signatureCanvas.width || !signatureCanvas.height) return null;
+    try {
+      const out = document.createElement('canvas');
+      out.width = signatureCanvas.width;
+      out.height = signatureCanvas.height;
+      const ctx = out.getContext('2d');
+      ctx.drawImage(signatureCanvas, 0, 0);
+      const imgData = ctx.getImageData(0, 0, out.width, out.height);
+      const d = imgData.data;
+      for (let i = 0; i < d.length; i += 4) {
+        d[i] = 255 - d[i];
+        d[i + 1] = 255 - d[i + 1];
+        d[i + 2] = 255 - d[i + 2];
+        d[i + 3] = 255;
+      }
+      ctx.putImageData(imgData, 0, 0);
+      return out.toDataURL('image/jpeg', 0.92);
+    } catch (e) {
+      console.warn('Signature export fallback:', e);
+      return signaturePad.toDataURL('image/png');
+    }
+  }
+
+  /* ---------------------------------------------------------------
+   * PHOTO CAPTURE (downscaled + compressed before storing)
+   * ------------------------------------------------------------- */
+  function decodePhoto(file) {
+    if (window.createImageBitmap) {
+      return createImageBitmap(file, { imageOrientation: 'from-image' })
+        .catch(() => decodePhotoViaImg(file));
+    }
+    return decodePhotoViaImg(file);
+  }
+
+  function decodePhotoViaImg(file) {
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
+      img.onerror = (err) => { URL.revokeObjectURL(url); reject(err); };
+      img.src = url;
+    });
+  }
+
+  async function compressPhoto(file) {
+    const source = await decodePhoto(file);
+    const w = source.width || source.naturalWidth;
+    const h = source.height || source.naturalHeight;
+    const scale = Math.min(1, CONFIG.maxPhotoDim / Math.max(w, h));
+    const cw = Math.max(1, Math.round(w * scale));
+    const ch = Math.max(1, Math.round(h * scale));
+    const canvas = document.createElement('canvas');
+    canvas.width = cw;
+    canvas.height = ch;
+    canvas.getContext('2d').drawImage(source, 0, 0, cw, ch);
+    if (source.close) source.close();
+    return canvas.toDataURL('image/jpeg', CONFIG.photoJpegQuality);
+  }
+
+  function readPhotoRaw(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (ev) => resolve(ev.target.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  takePhotoBtn.addEventListener('click', () => cameraInput.click());
+
+  cameraInput.addEventListener('change', async (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    takePhotoLabel.textContent = 'Processing photo…';
+    try {
+      capturedPhotoDataUrl = await compressPhoto(file);
+    } catch (err) {
+      console.warn('Photo compression failed, storing original:', err);
+      try {
+        capturedPhotoDataUrl = await readPhotoRaw(file);
+      } catch (rawErr) {
+        console.error(rawErr);
+        takePhotoLabel.textContent = 'Take Photo';
+        showToast('Could not read that photo. Please try again.');
+        return;
+      }
+    }
+    photoPreview.src = capturedPhotoDataUrl;
+    photoPreview.classList.remove('hidden');
+    photoEmptyState.classList.add('hidden');
+    photoStatus.textContent = 'Captured';
+    photoStatus.classList.add('border-emerald-400/40', 'text-emerald-300');
+    takePhotoLabel.textContent = 'Retake Photo';
+    validateForm();
+  });
+
+  function resetPhoto() {
+    capturedPhotoDataUrl = null;
+    cameraInput.value = '';
+    photoPreview.src = '';
+    photoPreview.classList.add('hidden');
+    photoEmptyState.classList.remove('hidden');
+    photoStatus.textContent = 'Not captured';
+    photoStatus.classList.remove('border-emerald-400/40', 'text-emerald-300');
+    takePhotoLabel.textContent = 'Take Photo';
+  }
+
+  /* ---------------------------------------------------------------
+   * FORM VALIDATION
+   * ------------------------------------------------------------- */
+  function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  function validateForm() {
+    const nameOk  = nameInput.value.trim().length > 1;
+    const emailOk = isValidEmail(emailInput.value.trim());
+    const phoneOk = phoneInput.value.trim().length >= 7;
+    const dateOk  = !!dateInput.value;
+    const agreeOk = agreeBox.checked;
+    const photoOk = !!capturedPhotoDataUrl;
+    const sigOk   = !signaturePad.isEmpty();
+
+    const allOk = nameOk && emailOk && phoneOk && dateOk && agreeOk && photoOk && sigOk;
+    submitBtn.disabled = !allOk;
+
+    if (allOk) {
+      formHint.textContent = 'Everything looks good. Ready to save this release.';
+    } else {
+      const missing = [];
+      if (!nameOk) missing.push('name');
+      if (!emailOk) missing.push('valid email');
+      if (!phoneOk) missing.push('phone');
+      if (!dateOk) missing.push('date');
+      if (!agreeOk) missing.push('agreement checkbox');
+      if (!photoOk) missing.push('photo');
+      if (!sigOk) missing.push('signature');
+      formHint.textContent = 'Still needed: ' + missing.join(', ') + '.';
+    }
+    return allOk;
+  }
+
+  [nameInput, emailInput, phoneInput, dateInput].forEach((input) => {
+    input.addEventListener('input', validateForm);
+  });
+  agreeBox.addEventListener('change', validateForm);
+  validateForm();
+
+  /* ---------------------------------------------------------------
+   * INDEXEDDB — LOCAL QUEUE STORAGE
+   * ------------------------------------------------------------- */
+  function openDB() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(CONFIG.dbName, CONFIG.dbVersion);
+      req.onupgradeneeded = () => {
+        const db = req.result;
+        if (!db.objectStoreNames.contains(CONFIG.storeName)) {
+          const store = db.createObjectStore(CONFIG.storeName, { keyPath: 'id' });
+          store.createIndex('createdAt', 'createdAt');
+        }
+      };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  async function dbAdd(record) {
+    const db = await openDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(CONFIG.storeName, 'readwrite');
+      tx.objectStore(CONFIG.storeName).add(record);
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+
+  async function dbGetAll() {
+    const db = await openDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(CONFIG.storeName, 'readonly');
+      const req = tx.objectStore(CONFIG.storeName).getAll();
+      req.onsuccess = () => resolve(req.result.sort((a, b) => b.createdAt - a.createdAt));
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  async function dbUpdate(record) {
+    const db = await openDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(CONFIG.storeName, 'readwrite');
+      tx.objectStore(CONFIG.storeName).put(record);
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+
+  async function dbDelete(id) {
+    const db = await openDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(CONFIG.storeName, 'readwrite');
+      tx.objectStore(CONFIG.storeName).delete(id);
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+
+  /* ---------------------------------------------------------------
+   * PDF GENERATION
+   * ------------------------------------------------------------- */
+  function loadImageDims(dataUrl) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve({ width: img.width, height: img.height });
+      img.onerror = () => resolve({ width: 1, height: 1 });
+      img.src = dataUrl;
+    });
+  }
+
+  async function buildPdfBlob(payload) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: 'pt', format: 'letter' });
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const margin = 48;
+    let y = 0;
+
+    // Header band
+    doc.setFillColor(0, 0, 0);
+    doc.rect(0, 0, pageWidth, 86, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(18);
+    doc.text(CONFIG.producerName.toUpperCase(), margin, 38);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(11);
+    doc.setTextColor(200, 200, 200);
+    doc.text('Talent Release Agreement · ' + CONFIG.eventName, margin, 58);
+    doc.setFontSize(9);
+    doc.setTextColor(160, 160, 160);
+    doc.text('Document ID: ' + payload.id, margin, 74);
+
+    y = 116;
+    doc.setTextColor(20, 20, 20);
+
+    // Participant info + photo side by side
+    const photoBoxW = 110, photoBoxH = 110;
+    const photoX = pageWidth - margin - photoBoxW;
+    doc.setDrawColor(220, 220, 220);
+    doc.rect(photoX, y, photoBoxW, photoBoxH);
+    if (payload.photoDataUrl) {
+      try {
+        const dims = await loadImageDims(payload.photoDataUrl);
+        const format = payload.photoDataUrl.includes('image/png') ? 'PNG' : 'JPEG';
+        const scale = Math.min(photoBoxW / dims.width, photoBoxH / dims.height);
+        const iw = dims.width * scale, ih = dims.height * scale;
+        doc.addImage(payload.photoDataUrl, format, photoX + (photoBoxW - iw) / 2, y + (photoBoxH - ih) / 2, iw, ih);
+      } catch (e) { /* ignore image errors, box remains */ }
+    }
+
+    const signedAt = new Date(payload.createdAt);
+    const signedTime = signedAt.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit', second: '2-digit' });
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(12);
+    doc.text('Participant Information', margin, y + 4);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    const fields = [
+      ['Full Name', payload.name],
+      ['Email', payload.email],
+      ['Phone', payload.phone],
+      ['Date', payload.date],
+      ['Signed At', signedTime],
+      ['Event', CONFIG.eventName]
+    ];
+    let fy = y + 24;
+    fields.forEach(([label, value]) => {
+      doc.setTextColor(120, 120, 120);
+      doc.text(label + ':', margin, fy);
+      doc.setTextColor(20, 20, 20);
+      doc.text(String(value || '·'), margin + 80, fy);
+      fy += 16;
+    });
+
+    y = Math.max(fy, y + photoBoxH) + 26;
+
+    // Release terms
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(12);
+    doc.setTextColor(20, 20, 20);
+    doc.text('Release Terms', margin, y);
+    y += 16;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9.5);
+    doc.setTextColor(60, 60, 60);
+    const lines = doc.splitTextToSize(payload.releaseText, pageWidth - margin * 2);
+    lines.forEach((line) => {
+      if (y > pageHeight - 60) {
+        doc.addPage();
+        y = margin;
+      }
+      doc.text(line, margin, y);
+      y += 13;
+    });
+
+    // Signature block
+    if (y > pageHeight - 170) {
+      doc.addPage();
+      y = margin;
+    }
+    y += 20;
+    doc.setDrawColor(210, 210, 210);
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 24;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(20, 20, 20);
+    doc.text('Signature', margin, y);
+
+    const sigBoxW = 240, sigBoxH = 80;
+    doc.setDrawColor(220, 220, 220);
+    doc.rect(margin, y + 10, sigBoxW, sigBoxH);
+    if (payload.signatureDataUrl) {
+      try {
+        const sd = await loadImageDims(payload.signatureDataUrl);
+        const sigFormat = payload.signatureDataUrl.includes('image/png') ? 'PNG' : 'JPEG';
+        const innerW = sigBoxW - 12, innerH = sigBoxH - 12;
+        const s = Math.min(innerW / sd.width, innerH / sd.height);
+        const sw = sd.width * s, sh = sd.height * s;
+        doc.addImage(payload.signatureDataUrl, sigFormat,
+          margin + 6 + (innerW - sw) / 2, y + 16 + (innerH - sh) / 2, sw, sh);
+      } catch (e) { /* ignore */ }
+    }
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9.5);
+    doc.setTextColor(90, 90, 90);
+    doc.text('Signed by: ' + payload.name, margin, y + 10 + sigBoxH + 18);
+    doc.text('Date: ' + payload.date + ' at ' + signedTime, margin, y + 10 + sigBoxH + 32);
+    doc.text('Captured electronically via Animal Farm Field Capture App v' + CONFIG.appVersion, margin, y + 10 + sigBoxH + 46);
+
+    // Footer on every page
+    const pageCount = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= pageCount; i++) {
+      doc.setPage(i);
+      doc.setFontSize(8);
+      doc.setTextColor(150, 150, 150);
+      doc.text(CONFIG.producerName + ' · Confidential', margin, pageHeight - 24);
+      doc.text('Page ' + i + ' of ' + pageCount, pageWidth - margin - 60, pageHeight - 24);
+    }
+
+    return doc.output('blob');
+  }
+
+  /* ---------------------------------------------------------------
+   * SUBMIT FLOW
+   * ------------------------------------------------------------- */
+  function slugify(str) {
+    return (str || 'release').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || 'release';
+  }
+
+  function triggerDownload(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  }
+
+  submitBtn.addEventListener('click', async () => {
+    if (!validateForm()) {
+      showToast('Please complete all required fields before saving.');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitLabel.textContent = 'Generating PDF…';
+
+    try {
+      const releaseTextEl = el('release-text');
+      const releaseText = releaseTextEl.innerText.trim();
+
+      const payload = {
+        id: (crypto.randomUUID ? crypto.randomUUID() : 'rel-' + Date.now() + '-' + Math.random().toString(16).slice(2)),
+        name: nameInput.value.trim(),
+        email: emailInput.value.trim(),
+        phone: phoneInput.value.trim(),
+        date: dateInput.value,
+        releaseText: releaseText,
+        photoDataUrl: capturedPhotoDataUrl,
+        signatureDataUrl: exportSignatureForPdf(),
+        createdAt: Date.now(),
+        status: 'pending'
+      };
+
+      const blob = await buildPdfBlob(payload);
+      const filename = 'AF-Release_' + slugify(payload.name) + '_' + payload.date + '.pdf';
+
+      let queued = true;
+      try {
+        await dbAdd({
+          id: payload.id,
+          name: payload.name,
+          email: payload.email,
+          phone: payload.phone,
+          date: payload.date,
+          createdAt: payload.createdAt,
+          status: 'pending',
+          filename: filename,
+          pdfBlob: blob
+        });
+      } catch (dbErr) {
+        queued = false;
+        console.error('Queue save failed:', dbErr);
+      }
+
+      triggerDownload(blob, filename);
+      if (queued) {
+        showToast('Saved to this iPad. Open the Queue anytime to email it to ' + CONFIG.adminEmail + '.', 4500);
+      } else {
+        showToast('PDF downloaded, but saving to the queue failed. Keep the downloaded copy safe and check storage space.', 6000);
+      }
+
+      await refreshQueue();
+      resetFormForNextPerson({ silent: true });
+    } catch (err) {
+      console.error(err);
+      showToast('Something went wrong generating the PDF. Please try again.');
+    } finally {
+      submitLabel.textContent = 'Save Release & Generate PDF';
+    }
+  });
+
+  /* ---------------------------------------------------------------
+   * RESET
+   * ------------------------------------------------------------- */
+  function resetFormForNextPerson({ silent } = {}) {
+    nameInput.value = '';
+    emailInput.value = '';
+    phoneInput.value = '';
+    setTodayDate();
+    agreeBox.checked = false;
+    resetPhoto();
+    signaturePad.clear();
+    signaturePlaceholder.classList.remove('hidden');
+    validateForm();
+    if (!silent) showToast('Cleared. Ready for the next person.');
+  }
+
+  resetBtn.addEventListener('click', () => {
+    const hasInput = nameInput.value || emailInput.value || phoneInput.value || capturedPhotoDataUrl || !signaturePad.isEmpty();
+    if (hasInput && !window.confirm('Clear all fields for the next person? This does not delete anything already saved to the queue.')) {
+      return;
+    }
+    resetFormForNextPerson();
+  });
+
+  /* ---------------------------------------------------------------
+   * QUEUE DRAWER
+   * ------------------------------------------------------------- */
+  function openQueue() {
+    queueOverlay.classList.remove('hidden');
+    queueDrawer.classList.remove('hidden');
+    refreshQueue();
+  }
+  function closeQueue() {
+    queueOverlay.classList.add('hidden');
+    queueDrawer.classList.add('hidden');
+  }
+  openQueueBtn.addEventListener('click', openQueue);
+  closeQueueBtn.addEventListener('click', closeQueue);
+  queueOverlay.addEventListener('click', closeQueue);
+
+  function fmtDate(ts) {
+    const d = new Date(ts);
+    return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) + ' · ' +
+      d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+  }
+
+  const shareSupported = !!(navigator.canShare && navigator.share);
+
+  async function refreshQueue() {
+    const records = await dbGetAll();
+    const pending = records.filter(r => r.status !== 'sent');
+    queueCount.textContent = String(pending.length);
+    shareAllBtn.disabled = !shareSupported || !pending.length;
+
+    if (!records.length) {
+      queueList.innerHTML = '<p class="text-sm text-[#6B7280] text-center py-10">No releases saved yet.</p>';
+      return;
+    }
+
+    queueList.innerHTML = '';
+    records.forEach((rec) => {
+      const row = document.createElement('div');
+      row.className = 'border border-[#27272A] rounded-xl p-3.5 bg-[#121212]';
+
+      const sentBadge = rec.status === 'sent'
+        ? '<span class="text-[10px] text-emerald-300 border border-emerald-400/30 rounded-full px-2 py-0.5">Sent</span>'
+        : '<span class="text-[10px] text-amber-300 border border-amber-400/30 rounded-full px-2 py-0.5">Pending</span>';
+
+      row.innerHTML =
+        '<div class="flex items-start justify-between gap-2">' +
+          '<div class="min-w-0">' +
+            '<p class="text-sm font-medium text-white truncate">' + escapeHtml(rec.name || 'Unnamed') + '</p>' +
+            '<p class="text-xs text-[#9CA3AF] truncate">' + escapeHtml(rec.email || '') + '</p>' +
+            '<p class="text-[11px] text-[#6B7280] mt-0.5">' + fmtDate(rec.createdAt) + '</p>' +
+          '</div>' +
+          sentBadge +
+        '</div>' +
+        '<div class="flex gap-2 mt-3"></div>';
+
+      const btnRow = row.querySelector('.flex.gap-2.mt-3');
+
+      const shareBtn = document.createElement('button');
+      shareBtn.className = 'flex-1 text-xs font-medium bg-white text-black rounded-lg py-2 disabled:opacity-40';
+      shareBtn.textContent = shareSupported ? 'Share / Email' : 'Share unavailable';
+      shareBtn.disabled = !shareSupported;
+      shareBtn.addEventListener('click', () => shareRecord(rec));
+      btnRow.appendChild(shareBtn);
+
+      const downloadBtn = document.createElement('button');
+      downloadBtn.className = 'flex-1 text-xs font-medium border border-[#27272A] text-[#9CA3AF] hover:text-white rounded-lg py-2';
+      downloadBtn.textContent = 'Save to Files';
+      downloadBtn.addEventListener('click', () => triggerDownload(rec.pdfBlob, rec.filename));
+      btnRow.appendChild(downloadBtn);
+
+      const moreBtn = document.createElement('button');
+      moreBtn.className = 'w-9 text-xs font-medium border border-[#27272A] text-[#9CA3AF] hover:text-white rounded-lg py-2';
+      moreBtn.textContent = '⋯';
+      moreBtn.addEventListener('click', () => toggleRecordMenu(row, rec));
+      btnRow.appendChild(moreBtn);
+
+      queueList.appendChild(row);
+    });
+  }
+
+  function toggleRecordMenu(row, rec) {
+    let menu = row.querySelector('.record-menu');
+    if (menu) { menu.remove(); return; }
+    menu = document.createElement('div');
+    menu.className = 'record-menu flex gap-2 mt-2';
+    menu.innerHTML =
+      '<button class="flex-1 text-[11px] text-emerald-300 border border-emerald-400/30 rounded-lg py-1.5">Mark as Sent</button>' +
+      '<button class="flex-1 text-[11px] text-red-300 border border-red-400/30 rounded-lg py-1.5">Delete</button>';
+    menu.children[0].addEventListener('click', async () => {
+      rec.status = 'sent';
+      await dbUpdate(rec);
+      showToast('Marked as sent.');
+      refreshQueue();
+    });
+    menu.children[1].addEventListener('click', async () => {
+      if (!window.confirm('Delete this saved release? This cannot be undone.')) return;
+      await dbDelete(rec.id);
+      showToast('Deleted from queue.');
+      refreshQueue();
+    });
+    row.appendChild(menu);
+  }
+
+  async function shareRecord(rec) {
+    try {
+      const file = new File([rec.pdfBlob], rec.filename, { type: 'application/pdf' });
+      const shareData = {
+        files: [file],
+        title: 'Talent Release · ' + rec.name,
+        text: 'Signed talent release for ' + rec.name + ' (' + CONFIG.eventName + '). Please send to ' + CONFIG.adminEmail + '.'
+      };
+      if (navigator.canShare && !navigator.canShare(shareData)) {
+        showToast('This device cannot share PDF files directly. Use Save to Files instead.');
+        return;
+      }
+      await navigator.share(shareData);
+      rec.status = 'sent';
+      await dbUpdate(rec);
+      refreshQueue();
+    } catch (err) {
+      if (err && err.name === 'AbortError') return; // user cancelled share sheet
+      console.error(err);
+      showToast('Could not open the share sheet. Try Save to Files instead.');
+    }
+  }
+
+  async function shareAllPending() {
+    const records = (await dbGetAll()).filter(r => r.status !== 'sent');
+    if (!records.length) { showToast('No pending releases to share.'); return; }
+    const files = records.map(r => new File([r.pdfBlob], r.filename, { type: 'application/pdf' }));
+    const shareData = {
+      files: files,
+      title: 'Talent Releases · ' + CONFIG.eventName,
+      text: records.length + ' signed talent release' + (records.length > 1 ? 's' : '') + ' (' + CONFIG.eventName + '). Please send to ' + CONFIG.adminEmail + '.'
+    };
+    if (!shareSupported || (navigator.canShare && !navigator.canShare(shareData))) {
+      showToast('This device cannot share ' + records.length + ' PDFs at once. Share them one at a time or use Save All to Files.');
+      return;
+    }
+    try {
+      await navigator.share(shareData);
+      for (const r of records) {
+        r.status = 'sent';
+        await dbUpdate(r);
+      }
+      showToast('Shared ' + records.length + ' release' + (records.length > 1 ? 's' : '') + '.');
+      refreshQueue();
+    } catch (err) {
+      if (err && err.name === 'AbortError') return;
+      console.error(err);
+      showToast('Could not share all at once. Try sharing releases individually.');
+    }
+  }
+
+  async function downloadAllPending() {
+    const records = (await dbGetAll()).filter(r => r.status !== 'sent');
+    if (!records.length) { showToast('No pending releases to save.'); return; }
+    let i = 0;
+    for (const rec of records) {
+      // stagger downloads so the browser does not swallow them
+      setTimeout(() => triggerDownload(rec.pdfBlob, rec.filename), i * 600);
+      i++;
+    }
+    showToast('Saving ' + records.length + ' PDF' + (records.length > 1 ? 's' : '') + ' to Files. Allow multiple downloads if asked.');
+  }
+
+  shareAllBtn.addEventListener('click', shareAllPending);
+  downloadAllBtn.addEventListener('click', downloadAllPending);
+
+  function escapeHtml(str) {
+    const d = document.createElement('div');
+    d.textContent = str || '';
+    return d.innerHTML;
+  }
+
+  /* ---------------------------------------------------------------
+   * OFFLINE + STORAGE DURABILITY
+   * ------------------------------------------------------------- */
+  // Ask the browser not to evict our saved releases under storage pressure.
+  if (navigator.storage && navigator.storage.persist) {
+    navigator.storage.persist().then((granted) => {
+      console.log('Persistent storage ' + (granted ? 'granted' : 'not granted'));
+    }).catch(() => {});
+  }
+
+  // Service worker caches the app shell so it loads with no signal.
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch((err) => {
+      console.warn('Service worker registration failed:', err);
+    });
+  }
+
+  /* ---------------------------------------------------------------
+   * INIT
+   * ------------------------------------------------------------- */
+  refreshQueue();
+})();
+</script>
+</body>
+</html>
