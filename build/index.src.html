@@ -69,6 +69,13 @@
   }
   .toast { animation: toast-in .25s ease-out; }
 
+  /* Keep content clear of the iPad status bar and home indicator
+   * (the app renders full-screen under them in home-screen mode). */
+  .safe-top { padding-top: env(safe-area-inset-top, 0px); }
+  .safe-top-sm { padding-top: calc(0.75rem + env(safe-area-inset-top, 0px)); }
+  .safe-top-lg { padding-top: calc(1.5rem + env(safe-area-inset-top, 0px)); }
+  .safe-bottom { padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); }
+
   @keyframes overlay-in {
     from { opacity: 0; }
     to   { opacity: 1; }
@@ -81,7 +88,7 @@
 <div id="app" class="h-screen flex flex-col overflow-hidden">
 
   <!-- ================= MASTHEAD ================= -->
-  <header class="shrink-0 h-16 flex items-center justify-between px-8 border-b border-white/[0.06] bg-[#09090B]/85 backdrop-blur">
+  <header class="safe-top-sm shrink-0 flex items-center justify-between px-8 pb-3 border-b border-white/[0.06] bg-[#09090B]/85 backdrop-blur">
     <div class="flex items-center gap-3.5">
       <div class="w-10 h-10 rounded-[10px] bg-white text-black text-[15px] font-extrabold tracking-tighter flex items-center justify-center">AF</div>
       <div>
@@ -188,7 +195,7 @@
   </main>
 
   <!-- ================= ACTION BAR ================= -->
-  <footer class="shrink-0 border-t border-white/[0.06] bg-[#09090B]/85 backdrop-blur px-8 py-4">
+  <footer class="safe-bottom shrink-0 border-t border-white/[0.06] bg-[#09090B]/85 backdrop-blur px-8 pt-4">
     <div class="max-w-[1600px] w-full mx-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
       <p id="form-hint" class="text-[13px] text-[#7A7A83] flex-1 order-2 sm:order-1">Fill in your details, read the agreement, and sign.</p>
       <div class="flex gap-3 order-1 sm:order-2">
@@ -204,7 +211,7 @@
 </div>
 
 <!-- ================= SIGNATURE OVERLAY ================= -->
-<div id="signature-overlay" class="hidden overlay-in fixed inset-0 z-50 bg-[#09090B] flex flex-col px-8 py-6">
+<div id="signature-overlay" class="safe-top-lg hidden overlay-in fixed inset-0 z-50 bg-[#09090B] flex flex-col px-8 pb-6">
   <div class="flex items-start justify-between mb-4">
     <div>
       <h3 class="text-[17px] font-semibold tracking-tight">Sign your release</h3>
@@ -274,7 +281,7 @@
 
 <!-- ================= QUEUE DRAWER ================= -->
 <div id="queue-overlay" class="hidden fixed inset-0 z-40 bg-black/70 backdrop-blur-sm"></div>
-<aside id="queue-drawer" class="hidden fixed top-0 right-0 z-50 h-full w-full sm:w-[420px] bg-[#0B0B0D] border-l border-white/[0.06] flex flex-col">
+<aside id="queue-drawer" class="safe-top hidden fixed top-0 right-0 z-50 h-full w-full sm:w-[420px] bg-[#0B0B0D] border-l border-white/[0.06] flex flex-col">
   <div class="flex items-center justify-between px-6 py-5 border-b border-white/[0.06]">
     <h3 class="text-[15px] font-semibold text-[#FAFAFA]">Saved Releases <span id="queue-count" class="text-[#7A7A83] font-normal"></span></h3>
     <button id="close-queue-btn" class="w-9 h-9 flex items-center justify-center rounded-[10px] border border-white/[0.08] text-[#A1A1AA] hover:text-white">
@@ -317,7 +324,7 @@
    * CONFIG
    * ------------------------------------------------------------- */
   const CONFIG = {
-    appVersion: '3.1.2',
+    appVersion: '3.1.3',
     eventName: 'Cisco Cybercon',
     producerName: 'Animal Farm, Inc.',
     adminEmail: 'louis@animalfarminc.com',
