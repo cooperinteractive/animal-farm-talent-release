@@ -3,7 +3,7 @@
  * in the background whenever the network is available.
  * Bump CACHE_VERSION on every deploy so updates roll out.
  */
-const CACHE_VERSION = 'af-release-v3.1.0';
+const CACHE_VERSION = 'af-release-v3.1.1';
 const APP_SHELL = ['./', './index.html', './sw.js'];
 
 self.addEventListener('install', (event) => {
