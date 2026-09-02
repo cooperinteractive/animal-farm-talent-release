@@ -57,10 +57,10 @@
     box-shadow: 0 0 0 3px rgba(255,255,255,0.10);
   }
 
-  /* bottom fade on the agreement well until fully scrolled */
+  /* soft bottom fade on the agreement well until fully scrolled */
   .fade-mask {
-    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 86%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 86%, transparent 100%);
   }
 
   @keyframes toast-in {
@@ -99,7 +99,34 @@
   <!-- ================= MAIN ================= -->
   <main class="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-2 gap-5 px-8 py-6 max-w-[1600px] w-full mx-auto overflow-hidden">
 
-    <!-- ============ LEFT COLUMN ============ -->
+    <!-- ============ LEFT COLUMN: AGREEMENT ============ -->
+    <section class="flex flex-col gap-5 min-h-0">
+
+      <!-- Media Release Agreement -->
+      <div class="surface-card rounded-2xl p-6 flex-1 flex flex-col min-h-0">
+        <h2 class="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7A7A83] mb-5">Media Release Agreement</h2>
+        <div id="release-text" class="thin-scroll fade-mask text-[13px] leading-[1.65] text-[#A1A1AA] flex-1 min-h-[8rem] overflow-y-auto space-y-3 pr-2">
+          <p><strong class="text-[#FAFAFA]">APPEARANCE, MEDIA &amp; TALENT RELEASE</strong><br/>
+          Animal Farm, Inc. ("Producer") &middot; Cisco Cybercon Event Coverage &middot; <span id="agreement-date" class="text-[#FAFAFA]"></span></p>
+          <p>In exchange for good and valuable consideration, the receipt and sufficiency of which I acknowledge, I grant to Animal Farm, Inc., its clients, licensees, successors, and assigns (collectively, "Producer") the irrevocable, perpetual, worldwide, royalty-free right to record and photograph my name, voice, image, likeness, statements, and appearance at Cisco Cybercon on the execution date stated in this document (collectively, the "Recording"), and to edit, reproduce, publish, distribute, broadcast, stream, and otherwise use the Recording, in whole or in part, in any medium now known or later developed, for promotional, marketing, editorial, archival, and commercial purposes.</p>
+          <p>Producer may use my name, biographical information, and likeness to identify me in and in connection with the Recording, including in on-screen titles, captions, and credits. Producer has no obligation to use the Recording, and I am not entitled to any compensation, royalties, or other payment for this release or for any use of the Recording.</p>
+          <p>I understand the Recording may be edited and combined with other footage, graphics, and audio, and that Producer owns all right, title, and interest in the Recording and in any work product that includes it, including copyright. I waive any right to inspect or approve the finished production or any related written or electronic copy, and I waive any moral rights or similar rights I may have in the Recording to the extent permitted by law.</p>
+          <p>I release and hold harmless Producer and its clients, agents, and employees from any and all claims, liability, or damages arising out of or in connection with the making or use of the Recording, including without limitation any claims for defamation, invasion of privacy, or violation of any right of publicity. This release is binding on me and on my heirs, legal representatives, and assigns.</p>
+          <p>I represent that I am at least 18 years of age and that I have full legal capacity and authority to sign this release.</p>
+          <p>This release is the entire agreement between Producer and me regarding its subject matter and replaces any prior statements or discussions. If any part of this release is found unenforceable, the remaining parts stay in full force.</p>
+          <p>I confirm that I have read this release in its entirety, that I consent to conduct this transaction electronically and to sign it by electronic signature, and that I am signing it voluntarily on the execution date and time stated in this document.</p>
+        </div>
+        <button id="agree-toggle" type="button" aria-pressed="false" aria-disabled="true"
+          class="opacity-40 w-full flex items-center gap-3.5 mt-5 rounded-xl border border-white/[0.08] bg-[#0B0B0D] px-4 py-3.5 text-left transition">
+          <span id="agree-box" class="w-7 h-7 shrink-0 rounded-md border-2 border-[#52525B] flex items-center justify-center transition">
+            <svg id="agree-check" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <span id="agree-label" class="text-[15px] text-[#A1A1AA]">I have read and agree to the terms of this Media Release Agreement.</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ============ RIGHT COLUMN: DETAILS + CAPTURE ============ -->
     <section class="flex flex-col gap-5 min-h-0 overflow-y-auto thin-scroll pr-1">
 
       <!-- Interviewee Details -->
@@ -125,71 +152,36 @@
         </div>
       </div>
 
-      <!-- Media Release Agreement -->
-      <div class="surface-card rounded-2xl p-6 flex-1 flex flex-col min-h-0">
-        <h2 class="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7A7A83] mb-5">Media Release Agreement</h2>
-        <div id="release-text" class="thin-scroll fade-mask text-[13px] leading-[1.65] text-[#A1A1AA] flex-1 min-h-[8rem] overflow-y-auto space-y-3 pr-2">
-          <p><strong class="text-[#FAFAFA]">APPEARANCE, MEDIA &amp; TALENT RELEASE</strong><br/>
-          Animal Farm, Inc. ("Producer") &middot; Cisco Cybercon Event Coverage</p>
-          <p>In exchange for good and valuable consideration, the receipt and sufficiency of which is hereby acknowledged, I grant to Animal Farm, Inc., its clients, successors, and assigns (collectively, "Producer") the irrevocable, worldwide, royalty-free right to record my name, voice, image, likeness, statements, and appearance (the "Recording") captured on the date below at Cisco Cybercon, and to edit, reproduce, publish, broadcast, stream, and otherwise use the Recording, in whole or in part, in any medium now known or hereafter devised, for promotional, marketing, editorial, archival, and commercial purposes.</p>
-          <p>I understand the Recording may be combined with other footage, graphics, and audio, and that Producer owns all right, title, and interest in the resulting work product, including copyright. I waive any right to inspect or approve the finished production or any related written or electronic copy.</p>
-          <p>I release and hold harmless Producer and its clients, agents, and employees from any and all claims, liability, or damages arising out of or in connection with the use of the Recording, including without limitation any claims for defamation, invasion of privacy, or right of publicity.</p>
-          <p>I confirm I am at least 18 years of age, that I have read this release in its entirety, that I consent to conduct this transaction electronically, and that I am signing it voluntarily.</p>
-        </div>
-        <button id="agree-toggle" type="button" aria-pressed="false" aria-disabled="true"
-          class="opacity-40 w-full flex items-center gap-3.5 mt-5 rounded-xl border border-white/[0.08] bg-[#0B0B0D] px-4 py-3.5 text-left transition">
-          <span id="agree-box" class="w-7 h-7 shrink-0 rounded-md border-2 border-[#52525B] flex items-center justify-center transition">
-            <svg id="agree-check" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-          </span>
-          <span id="agree-label" class="text-[15px] text-[#A1A1AA]">I have read and agree to the terms of this Media Release Agreement.</span>
-        </button>
-      </div>
-    </section>
+      <!-- Signature & Photo -->
+      <div class="surface-card rounded-2xl p-6">
+        <h2 class="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7A7A83] mb-5">Signature &amp; Photo</h2>
+        <div class="flex flex-col gap-4">
 
-    <!-- ============ RIGHT COLUMN ============ -->
-    <section class="flex flex-col gap-5 min-h-0 overflow-y-auto thin-scroll pr-1">
-
-      <!-- Photo Capture (compact) -->
-      <div class="surface-card rounded-2xl p-6 shrink-0">
-        <div class="flex items-center justify-between mb-5">
-          <h2 class="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7A7A83]">Photo</h2>
-          <span id="photo-status" class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full text-[11px] font-medium bg-white/[0.06] text-[#A1A1AA]"><span id="photo-status-dot" class="hidden w-1.5 h-1.5 rounded-full bg-emerald-400"></span><span id="photo-status-text">Not captured</span></span>
-        </div>
-
-        <input id="camera-input" type="file" accept="image/*" capture="environment" class="hidden" />
-
-        <div class="flex items-center gap-5">
-          <div id="photo-frame" class="relative w-24 h-24 lg:w-28 lg:h-28 shrink-0 rounded-xl surface-well overflow-hidden flex items-center justify-center">
-            <div id="photo-empty-state" class="flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-[#52525B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <div class="flex items-center gap-5">
+            <div class="relative w-28 h-14 shrink-0 rounded-xl surface-well overflow-hidden flex items-center justify-center">
+              <svg id="signature-empty-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#52525B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+              <img id="signature-thumb" src="" alt="Signature" class="hidden absolute inset-0 w-full h-full object-contain" />
             </div>
-            <img id="photo-preview" src="" alt="Captured headshot" class="hidden absolute inset-0 w-full h-full object-cover" />
+            <button id="open-signature-btn" class="flex-1 h-12 flex items-center justify-center gap-2 bg-white/[0.06] hover:bg-white/[0.10] border border-white/[0.08] text-[#FAFAFA] font-medium text-[15px] rounded-[10px] transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+              <span id="open-signature-label">Add Signature</span>
+            </button>
           </div>
-          <div class="flex-1 min-w-0">
-            <button id="take-photo-btn" class="w-full flex items-center justify-center gap-2 bg-white text-black font-semibold text-[15px] rounded-[10px] h-12 hover:bg-gray-200 transition">
+
+          <div class="flex items-center gap-5">
+            <div id="photo-frame" class="relative w-28 h-14 shrink-0 rounded-xl surface-well overflow-hidden flex items-center justify-center">
+              <div id="photo-empty-state" class="flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#52525B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+              </div>
+              <img id="photo-preview" src="" alt="Captured headshot" class="hidden absolute inset-0 w-full h-full object-cover" />
+            </div>
+            <input id="camera-input" type="file" accept="image/*" capture="environment" class="hidden" />
+            <button id="take-photo-btn" class="flex-1 h-12 flex items-center justify-center gap-2 bg-white/[0.06] hover:bg-white/[0.10] border border-white/[0.08] text-[#FAFAFA] font-medium text-[15px] rounded-[10px] transition">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
               <span id="take-photo-label">Take Photo</span>
             </button>
           </div>
-        </div>
-      </div>
 
-      <!-- Signature (dominant surface) -->
-      <div class="surface-card rounded-2xl p-6 flex-1 flex flex-col min-h-[280px]">
-        <div class="flex items-center justify-between mb-5">
-          <h2 class="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7A7A83]">Signature</h2>
-          <button id="clear-signature-btn" class="text-[13px] font-medium text-[#A1A1AA] hover:text-white px-2 py-1 transition">Clear</button>
-        </div>
-        <div class="relative flex-1 surface-well rounded-xl overflow-hidden">
-          <canvas id="signature-canvas" class="w-full h-full block"></canvas>
-          <!-- baseline guide (visual only; not part of the exported canvas) -->
-          <div class="pointer-events-none absolute inset-x-8 bottom-[26%] h-px bg-white/15"></div>
-          <span class="pointer-events-none absolute left-8 bottom-[27%] text-white/25 text-[15px] leading-none">&times;</span>
-          <p id="signature-placeholder" class="pointer-events-none absolute inset-x-0 bottom-[36%] text-center text-[#52525B] text-[15px]">Sign here with finger or stylus</p>
-        </div>
-        <div class="flex items-center justify-between mt-3 gap-4">
-          <p class="text-[13px] text-[#A1A1AA] truncate">Signing as <span id="signing-as" class="text-[#FAFAFA] font-medium">&hellip;</span></p>
-          <p class="text-[12px] text-[#7A7A83] text-right shrink-0" id="signing-date"></p>
         </div>
       </div>
     </section>
@@ -209,6 +201,29 @@
       </div>
     </div>
   </footer>
+</div>
+
+<!-- ================= SIGNATURE OVERLAY ================= -->
+<div id="signature-overlay" class="hidden overlay-in fixed inset-0 z-50 bg-[#09090B] flex flex-col px-8 py-6">
+  <div class="flex items-start justify-between mb-4">
+    <div>
+      <h3 class="text-[17px] font-semibold tracking-tight">Sign your release</h3>
+      <p class="text-[13px] text-[#A1A1AA] mt-1">Signing as <span id="signing-as" class="text-[#FAFAFA] font-medium">&hellip;</span> &middot; <span id="signing-date"></span></p>
+    </div>
+    <button id="clear-signature-btn" class="text-[14px] font-medium text-[#A1A1AA] hover:text-white px-3 py-2 transition">Clear</button>
+  </div>
+  <div class="relative flex-1 surface-well rounded-2xl overflow-hidden">
+    <canvas id="signature-canvas" class="w-full h-full block"></canvas>
+    <!-- baseline guide (visual only; not part of the exported canvas) -->
+    <div class="pointer-events-none absolute inset-x-12 bottom-[24%] h-px bg-white/15"></div>
+    <span class="pointer-events-none absolute left-12 bottom-[25%] text-white/25 text-[17px] leading-none">&times;</span>
+    <p id="signature-placeholder" class="pointer-events-none absolute inset-x-0 bottom-[34%] text-center text-[#52525B] text-[17px]">Sign here with finger or stylus</p>
+  </div>
+  <p class="text-[12px] text-[#7A7A83] text-center mt-3">By signing, I consent to conduct this transaction electronically.</p>
+  <div class="flex gap-3 mt-4 justify-end">
+    <button id="sig-cancel-btn" class="h-12 px-6 rounded-[10px] text-[15px] font-medium text-[#A1A1AA] hover:text-white border border-white/[0.08] transition">Cancel</button>
+    <button id="sig-done-btn" class="h-12 px-10 rounded-[10px] bg-white text-black text-[15px] font-semibold hover:bg-gray-200 transition">Done</button>
+  </div>
 </div>
 
 <!-- ================= REVIEW OVERLAY ================= -->
@@ -302,7 +317,7 @@
    * CONFIG
    * ------------------------------------------------------------- */
   const CONFIG = {
-    appVersion: '3.0.0',
+    appVersion: '3.1.0',
     eventName: 'Cisco Cybercon',
     producerName: 'Animal Farm, Inc.',
     adminEmail: 'admin@animalfarminc.com',
@@ -334,9 +349,14 @@
   const takePhotoLabel   = el('take-photo-label');
   const photoPreview     = el('photo-preview');
   const photoEmptyState  = el('photo-empty-state');
-  const photoStatusDot   = el('photo-status-dot');
-  const photoStatusText  = el('photo-status-text');
 
+  const signatureOverlay   = el('signature-overlay');
+  const openSignatureBtn   = el('open-signature-btn');
+  const openSignatureLabel = el('open-signature-label');
+  const sigCancelBtn       = el('sig-cancel-btn');
+  const sigDoneBtn         = el('sig-done-btn');
+  const signatureThumb     = el('signature-thumb');
+  const signatureEmptyIcon = el('signature-empty-icon');
   const clearSigBtn        = el('clear-signature-btn');
   const signatureCanvas    = el('signature-canvas');
   const signaturePlaceholder = el('signature-placeholder');
@@ -384,9 +404,12 @@
   let capturedPhotoDataUrl = null;
   let agreed = false;
   let releaseRead = false;
+  let signatureCaptured = false;
 
   el('app-version').textContent = 'v' + CONFIG.appVersion;
-  signingDateEl.textContent = new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+  const todayLong = new Date().toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' });
+  signingDateEl.textContent = todayLong;
+  el('agreement-date').textContent = todayLong;
 
   /* ---------------------------------------------------------------
    * TOAST
@@ -515,11 +538,50 @@
   signaturePad.addEventListener('beginStroke', () => {
     signaturePlaceholder.classList.add('hidden');
   });
-  signaturePad.addEventListener('endStroke', validateForm);
 
   clearSigBtn.addEventListener('click', () => {
     signaturePad.clear();
     signaturePlaceholder.classList.remove('hidden');
+  });
+
+  /* ---------------------------------------------------------------
+   * SIGNATURE MODAL
+   * ------------------------------------------------------------- */
+  let sigSnapshot = null;
+
+  function openSignatureModal() {
+    signatureOverlay.classList.remove('hidden');
+    sigSnapshot = signaturePad.isEmpty() ? [] : signaturePad.toData();
+    // The canvas has no size while the overlay is hidden; size it once visible.
+    setTimeout(() => {
+      resizeSignatureCanvas();
+      signaturePlaceholder.classList.toggle('hidden', !signaturePad.isEmpty());
+    }, 60);
+  }
+
+  function closeSignatureModal() {
+    signatureOverlay.classList.add('hidden');
+  }
+
+  openSignatureBtn.addEventListener('click', openSignatureModal);
+
+  sigCancelBtn.addEventListener('click', () => {
+    signaturePad.clear();
+    if (sigSnapshot && sigSnapshot.length) signaturePad.fromData(sigSnapshot);
+    closeSignatureModal();
+  });
+
+  sigDoneBtn.addEventListener('click', () => {
+    if (signaturePad.isEmpty()) {
+      showToast('Sign in the box first, or tap Cancel.');
+      return;
+    }
+    signatureCaptured = true;
+    signatureThumb.src = signaturePad.toDataURL('image/png');
+    signatureThumb.classList.remove('hidden');
+    signatureEmptyIcon.classList.add('hidden');
+    openSignatureLabel.textContent = 'Edit Signature';
+    closeSignatureModal();
     validateForm();
   });
 
@@ -622,8 +684,6 @@
     photoPreview.src = capturedPhotoDataUrl;
     photoPreview.classList.remove('hidden');
     photoEmptyState.classList.add('hidden');
-    photoStatusText.textContent = 'Captured';
-    photoStatusDot.classList.remove('hidden');
     takePhotoLabel.textContent = 'Retake Photo';
     validateForm();
   });
@@ -634,8 +694,6 @@
     photoPreview.src = '';
     photoPreview.classList.add('hidden');
     photoEmptyState.classList.remove('hidden');
-    photoStatusText.textContent = 'Not captured';
-    photoStatusDot.classList.add('hidden');
     takePhotoLabel.textContent = 'Take Photo';
   }
 
@@ -649,7 +707,7 @@
       nameInput.value.trim().length > 1,
       isValidEmail(emailInput.value.trim()),
       agreed,
-      !signaturePad.isEmpty(),
+      signatureCaptured,
       !!capturedPhotoDataUrl
     ];
     const done = steps.filter(Boolean).length;
@@ -1000,6 +1058,11 @@
     resetPhoto();
     signaturePad.clear();
     signaturePlaceholder.classList.remove('hidden');
+    signatureCaptured = false;
+    signatureThumb.src = '';
+    signatureThumb.classList.add('hidden');
+    signatureEmptyIcon.classList.remove('hidden');
+    openSignatureLabel.textContent = 'Add Signature';
     pendingSignatureDataUrl = null;
     validateForm();
     if (!silent) showToast('Cleared. Ready for the next person.');
